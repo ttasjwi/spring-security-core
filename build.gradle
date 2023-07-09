@@ -20,6 +20,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// SpringBoot - Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// SpringBoot - Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 
 tasks.named('test') {
