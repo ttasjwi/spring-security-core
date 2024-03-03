@@ -22,6 +22,10 @@ repositories {
 }
 
 dependencies {
+    // kotlin
+    implementation(Dependencies.KOTLIN_REFLECT)
+    implementation(Dependencies.KOTLIN_JDK)
+
     // spring
     implementation(Dependencies.SPRING_VALIDATION)
     implementation(Dependencies.SPRING_WEB)
@@ -30,12 +34,12 @@ dependencies {
     implementation(Dependencies.THYMELEAF)
     implementation(Dependencies.THYMELEAF_EXTRAS)
 
+    // spring security
+    implementation(Dependencies.SPRING_SECURITY)
+    testImplementation(Dependencies.SPRING_SECURITY_TEST)
+
     // json
     implementation(Dependencies.JACKSON)
-
-    // kotlin
-    implementation(Dependencies.KOTLIN_REFLECT)
-    implementation(Dependencies.KOTLIN_JDK)
 
     // test
     testImplementation(Dependencies.SPRING_TEST)
