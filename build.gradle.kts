@@ -41,6 +41,9 @@ dependencies {
     // json
     implementation(Dependencies.JACKSON)
 
+    // logging
+    implementation(Dependencies.KOTLIN_LOGGING)
+
     // test
     testImplementation(Dependencies.SPRING_TEST)
 }
