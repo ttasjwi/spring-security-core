@@ -5,12 +5,13 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.SecurityFilterChain
-import org.springframework.security.web.authentication.logout.LogoutHandler
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler
 
 @Configuration
-class SecurityConfig {
+class SecurityConfig(
+    private val userDetailsService: UserDetailsService
+) {
 
     private val logger = getLogger(javaClass)
 
@@ -21,27 +22,15 @@ class SecurityConfig {
                 authorize(anyRequest, authenticated)
             }
             formLogin { }
-            logout {
-                //logoutUrl = "/logout" // 로그아웃 처리 URL(POST)
-                //logoutSuccessUrl = "/login" // 로그아웃 성공 후 이동 페이지(successHandler 설정을 안 하면 이쪽으로 리다이렉트 되도록 함)
-                addLogoutHandler(myLogoutHandler()) // 로그아웃 핸들러
-                deleteCookies("JSESSIONID", "remember-me") // 로그아웃 후 쿠키 삭제
-                logoutSuccessHandler = logoutSuccessHandler() // 로그아웃 성공 후 핸들러
+            rememberMe {
+                rememberMeParameter = "remember" // 파라미터명 : 기본 파라미터명은 remember-me
+                tokenValiditySeconds = 3600 // 토큰이 유효한 시간 : 초 단위 설정, 기본 값은 14일(2주)
+                // alwaysRemember = true // 사용자가 리멤버 미를 활성화시키는 작업 없이도 항상 실행 (일반적으로 false)
+                userDetailsService = userDetailsService() // 리멤버미 인증 작업에서 사용자 계정을 조회하는 작업 수행. 반드시 필요...
             }
         }
         return http.build()
     }
 
-    private fun myLogoutHandler() = LogoutHandler { request, response, authentication ->
-        val session = request.session
-        session.invalidate() // 세션 무효화
-        logger.info { "세션이 무효화됐습니다." }
-        // 추가적인 로직을 구현하고 싶으면 여기서
-    }
-
-    private fun logoutSuccessHandler() = LogoutSuccessHandler { request, response, authentication ->
-        response.sendRedirect("/login") // 로그인 페이지로 이동
-        // 추가적인 로직을 구현하고 싶으면 여기서 구현
-        logger.info { "로그아웃에 성공했으므로 로그인 페이지로 이동합니다." }
-    }
+    private fun userDetailsService() = userDetailsService
 }
