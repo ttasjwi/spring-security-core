@@ -21,5 +21,6 @@
 - <a href="/note/로그아웃 처리, Logout Filter.md" target="_blank">로그아웃 처리, Logout Filter</a>
 - <a href="/note/RememberMe 인증.md" target="_blank">RememberMe 인증</a>
 - <a href="/note/동시세션 제어.md" target="_blank">동시세션 제어</a>
+- <a href="/note/세션고정 보호.md" target="_blank">세션고정 보호</a>
 
 ---
