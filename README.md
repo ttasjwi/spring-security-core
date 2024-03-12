@@ -22,5 +22,6 @@
 - <a href="/note/RememberMe 인증.md" target="_blank">RememberMe 인증</a>
 - <a href="/note/동시세션 제어.md" target="_blank">동시세션 제어</a>
 - <a href="/note/세션고정 보호.md" target="_blank">세션고정 보호</a>
+- <a href="/note/세션생성 정책.md" target="_blank">세션생성 정책</a>
 
 ---
