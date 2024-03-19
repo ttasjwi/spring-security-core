@@ -24,5 +24,6 @@
 - <a href="/note/세션고정 보호.md" target="_blank">세션고정 보호</a>
 - <a href="/note/세션생성 정책.md" target="_blank">세션생성 정책</a>
 - <a href="/note/세션 제어 관련 필터 및 세션인증 전략(SessionAuthenticationStrategy).md" target="_blank">세션 제어 관련 필터 및 세션인증 전략(SessionAuthenticationStrategy)</a>
+- <a href="/note/인가 API - 권한설정과 표현식.md" target="_blank">인가 API - 권한설정과 표현식</a>
 
 ---
