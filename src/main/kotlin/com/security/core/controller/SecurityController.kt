@@ -9,15 +9,9 @@ class SecurityController {
     @GetMapping("/")
     fun index() = "home"
 
-    @GetMapping("/user")
-    fun user() = "user"
+    @GetMapping("/login")
+    fun login() = "login"
 
-    @GetMapping("/sys")
-    fun sys() = "sys"
-
-    @GetMapping("/admin/pay")
-    fun adminPay() = "adminPay"
-
-    @GetMapping("/admin/**")
-    fun admin() = "admin"
+    @GetMapping("/denied")
+    fun denied() = "denied"
 }
