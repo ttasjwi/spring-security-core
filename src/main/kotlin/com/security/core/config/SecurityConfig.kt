@@ -15,10 +15,6 @@ class SecurityConfig {
             authorizeHttpRequests {
                 authorize(anyRequest, permitAll)
             }
-            formLogin {}
-
-            // 명시적으로 선언
-            csrf {}
         }
         return http.build()
     }
