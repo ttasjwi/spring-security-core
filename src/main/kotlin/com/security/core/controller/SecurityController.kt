@@ -9,4 +9,8 @@ class SecurityController {
     @GetMapping("/")
     fun index() = "index"
 
+    @GetMapping("/admin/pay")
+    fun admin() = "adminPay"
+
 }
+

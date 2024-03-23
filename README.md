@@ -33,5 +33,6 @@
 <h2 id="architecture">스프링 시큐리티 주요 아키텍처 이해</h2>
 
 - <a href="/note/architecture/위임 필터 및 필터 빈 초기화 - DelegatingFilterProxy, FilterChainProxy.md" target="_blank">위임 필터 및 필터 빈 초기화 - DelegatingFilterProxy, FilterChainProxy</a>
+- <a href="/note/architecture/다중 SecurityFilterChain.md" target="_blank">다중 SecurityFilterChain</a>
 
 ---
