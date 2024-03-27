@@ -56,3 +56,72 @@ public interface Authentication extends Principal, Serializable {
 - 인증에 성공하면 인증 성공처리는 주로 AuthenticationSuccessHandler에서 후속처리를 한다.
 
 ---
+
+## 3. 실습
+### 3.1 설정
+```kotlin
+@RestController
+class SecurityController {
+
+    @GetMapping("/")
+    fun index() = "index"
+
+}
+```
+```kotlin
+@EnableWebSecurity
+@Configuration
+class SecurityConfig {
+
+    @Bean
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        http {
+            authorizeHttpRequests { authorize(anyRequest, authenticated) }
+            formLogin { }
+        }
+        return http.build()
+    }
+
+}
+```
+
+### 3.2 확인
+![authentication-2](./imgs/authentication-2.png)
+
+- 최초로 루트 페이지로 접근할 때 우리는 어떠한 자격증명도 보유하고 있지 않기 때문에(익명사용자) AuthorizationFilter에서 인가 실패한다.
+  - 이 과정에서도 SecurityContextHolder.getContext().getAuthentication 을 통해 인증정보를 꺼내온다.
+- 익명사용자의 인가 실패는 ExceptionTranslationFilter에서 인증 예외 후속처리 로직으로 위임된다.
+- 요청이 캐싱된 뒤 로그인 페이지로 리다이렉트 된다.
+- DefaultLoginPageGeneratingFilter에서 요청을 가로채서 로그인 페이지를 응답으로 내려준다.
+
+![authentication-3](./imgs/authentication-3.png)
+
+- 로그인 페이지를 응답으로 받아서 브라우저가 렌더링한다.
+- 여기서 로그인을 시도해보자. "/login"으로 POST 요청이 가게 된다.
+
+![authentication-4](./imgs/authentication-4.png)
+
+![authentication-5](./imgs/authentication-5.png)
+
+- Form 방식으로 POST /login 엔드포인트로 로그인을 시도하면 UsernamePasswordFilter에서 요청을 가로채고,
+사용자 요청 정보를 기반으로 미인증 Authentication 객체를 생성한다.
+- AuthenticationManager(구현체 : ProviderManager) 에게 인증 처리를 위임한다.
+- 인증에 성공하면 AuthenticationManager는 인증 성공된 Authentication을 반환한다.
+  - 이때 Credential에 해당되는 비밀번호 정보는 Authentication 객체에 존재하지 않는다.
+  - 인증 상태는 authenticated 상태는 true 이다
+
+![authentication-6](./imgs/authentication-6.png)
+
+- UsernamePasswordAuthenticationFilter (AbstractAuthenticationProcessingFilter) 는 SecurityContextHolderStrategy를 통해
+SecurityContext를 생성한다.
+- SecurityContext에 Authentication을 저장하고, SecurityContextHolderStrategy에 SecurityContext를 저장한다.
+- 이제 이후 우리는 요청-응답 사이의 라이프사이클 내에서, SecurityContextHolderStrategy - SecurityContext를 통해 Authentication을
+얻어올 수 있다.
+- 스프링 시큐리티 기술 의존성을 고려하지 않는다면, 모든 곳에서 SpringSecurityContextHolderStrategy를 통해 인증 객체를 꺼내서 쓸 수 있다. 
+이를 통해 서비스 레이어 등에서 현재 사용자 정보를 쉽게 추출할 수 있다. 개인적인 생각이지만 애플리케이션 레이어에서 스프링 시큐리티 기술에 강하게 의존하는 것은
+유지보수성 관점에서 좋은 방법은 아니라고 판단된다. 기술 의존성을 어느 정도 배제시키기 위해 약간의 추상화 계층을 두고 현재 사용자 정보를 꺼내오는데 사용하는 정도가 좋을 것 같다.
+- 참고로 여기서 securityContextRepository는 인증의 장기 저장과 관련된 컴포넌트이다.
+  - 이 부분에 대해서는 뒤에서 배울 것이다.
+  - 토큰 또는 세션을 사용하여 사용자의 인증 정보를 저장할 수 있는 수단을 마련하고 이후 매번 사용자가 요청할 때마다 로그인 과정을 거치지 않도록 할 수 있다.
+
+---
