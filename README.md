@@ -35,5 +35,6 @@
 - <a href="/note/architecture/위임 필터 및 필터 빈 초기화 - DelegatingFilterProxy, FilterChainProxy.md" target="_blank">위임 필터 및 필터 빈 초기화 - DelegatingFilterProxy, FilterChainProxy</a>
 - <a href="/note/architecture/다중 SecurityFilterChain.md" target="_blank">다중 SecurityFilterChain</a>
 - <a href="/note/architecture/인증 개념 이해 - Authentication.md" target="_blank">인증 개념 이해 - Authentication</a>
+- <a href="/note/architecture/SecurityContextHolder - 요청 사이클 동안 SecurityContext 홀딩.md" target="_blank">SecurityContextHolder - 요청 사이클 동안 SecurityContext 홀딩</a>
 
 ---
