@@ -1,5 +1,5 @@
 <nav>
-    <a href="../#kotlin" target="_blank">[Spring Security Core]</a>
+    <a href="../../#kotlin" target="_blank">[Spring Security Core]</a>
 </nav>
 
 # 코틀린 DSL 설정

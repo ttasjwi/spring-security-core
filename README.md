@@ -1,10 +1,10 @@
 # Spring-Security-Core
+- 강의 링크 : <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%99%84%EC%A0%84%EC%A0%95%EB%B3%B5" target="_blank">스프링 시큐리티 완전 정복</a>
 
 ---
 
 <h2 id="kotlin">코틀린 관련</h2>
-
-- <a href="/note/코틀린 DSL.md" target="_blank">코틑린 DSL</a>
+- <a href="/note/kotlin/코틀린 DSL.md" target="_blank">코틑린 DSL</a>
 
 ---
 
