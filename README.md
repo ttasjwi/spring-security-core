@@ -19,6 +19,7 @@
 
 - <a href="/note/init/프로젝트 생성 & 의존성 추가.md" target="_blank">프로젝트 생성 & 의존성 추가</a>
 - <a href="/note/init/SecurityBuilder & SecurityConfigurer.md" target="_blank">SecurityBuilder & SecurityConfigurer</a>
+- <a href="/note/init/HttpSecurity & WebSecurity.md" target="_blank">HttpSecurity & WebSecurity</a>
 
 ---
 
