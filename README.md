@@ -9,18 +9,13 @@
 
 ---
 
-<h2 id="spring-boot-settings">스프링부트 설정</h2>
-
-- <a href="/note/디폴트 사용자 이름, 패스워드 수정.md" target="_blank">디폴트 사용자 이름, 패스워드 수정</a>
-
----
-
 <h2 id="init">초기화 과정 이해</h2>
 
 - <a href="/note/init/프로젝트 생성 & 의존성 추가.md" target="_blank">프로젝트 생성 & 의존성 추가</a>
 - <a href="/note/init/SecurityBuilder & SecurityConfigurer.md" target="_blank">SecurityBuilder & SecurityConfigurer</a>
 - <a href="/note/init/HttpSecurity & WebSecurity.md" target="_blank">HttpSecurity & WebSecurity</a>
 - <a href="/note/init/Filter, DelegatingFilterProxy, FilterChainProxy.md" target="_blank">Filter, DelegatingFilterProxy, FilterChainProxy</a>
+- <a href="/note/init/사용자 정의 보안 설정, 기본 사용자 설정.md" target="_blank">사용자 정의 보안 설정, 기본 사용자 설정</a>
 
 ---
 
