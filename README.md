@@ -19,6 +19,20 @@
 
 ---
 
+<h2 id="authentication-process">인증 프로세스</h2>
+
+- <a href="/note/authentication-process/폼 인증 - formLogin().md" target="_blank">폼 인증 - formLogin()</a>
+- 폼 인증 필터 - UsernamePasswordAuthenticationFilter, AbstractAuthenticationProcessingFilter
+- basic 인증 - httpBasic()
+- basic 인증 필터 - BasicAuthenticationFilter
+- 리멤버미 인증 - rememberMe()
+- 리멤버미 인증 필터 - RememberMeAuthenticationFilter
+- 익명인증 사용자 - anonymous()
+- 로그아웃 - logout()
+- 요청 캐시 - RequestCache / SavedRequest
+
+---
+
 이하는 구버전
 
 <h2 id="api-filter">스프링 시큐리티 기본 API 및 Filter 이해</h2>
