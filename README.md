@@ -23,7 +23,7 @@
 
 - <a href="/note/authentication-process/폼 인증 - formLogin().md" target="_blank">폼 인증 - formLogin()</a>
 - <a href="/note/authentication-process/폼 인증 필터 - UsernamePasswordAuthenticationFilter.md" target="_blank">폼 인증 필터 - UsernamePasswordAuthenticationFilter</a>
-- basic 인증 - httpBasic()
+- <a href="/note/authentication-process/Basic 인증 - httpBasic().md" target="_blank">Basic 인증 - httpBasic()</a>
 - basic 인증 필터 - BasicAuthenticationFilter
 - 리멤버미 인증 - rememberMe()
 - 리멤버미 인증 필터 - RememberMeAuthenticationFilter

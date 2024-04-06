@@ -10,19 +10,4 @@ class HelloController {
     fun index(): String {
         return "root"
     }
-
-    @GetMapping("/home")
-    fun home(): String {
-        return "home"
-    }
-
-    @GetMapping("/loginPage")
-    fun login(): String {
-        return "loginPage"
-    }
-
-    @GetMapping("/failed")
-    fun failed(): String {
-        return "failed"
-    }
 }
