@@ -25,7 +25,7 @@
 - <a href="/note/authentication-process/폼 인증 필터 - UsernamePasswordAuthenticationFilter.md" target="_blank">폼 인증 필터 - UsernamePasswordAuthenticationFilter</a>
 - <a href="/note/authentication-process/Basic 인증 - httpBasic().md" target="_blank">Basic 인증 - httpBasic()</a>
 - <a href="/note/authentication-process/Basic 인증 필터 - BasicAuthenticationFilter.md" target="_blank">Basic 인증 필터 - BasicAuthenticationFilter</a>
-- 리멤버미 인증 - rememberMe()
+- <a href="/note/authentication-process/기억하기 인증 - rememberMe().md" target="_blank">기억하기 인증 - rememberMe()</a>
 - 리멤버미 인증 필터 - RememberMeAuthenticationFilter
 - 익명인증 사용자 - anonymous()
 - 로그아웃 - logout()
