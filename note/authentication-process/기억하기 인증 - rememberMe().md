@@ -8,7 +8,7 @@
 
 ## 1. RememberMe 인증
 
-![remember-me](./imgs/remember-me.png)
+![remember-me-1](./imgs/remember-me-1.png)
 
 - 사용자가 웹 사이트나 애플리케이션에 로그인할 때 자동으로 인증 정보를 기억하는 기능
 - 폼 로그인을 담당하는 UsernamePasswordAuthenticationFilter와 함께 사용되며, AbstractAuthenticationProcessingFilter 슈퍼 클래스에서 훅을 통해 구현됨
@@ -43,6 +43,83 @@ public interface RememberMeServices {
     - PersistentTokenBasedRememberMeServices: 토큰을 발급하되, 인증에 필요한 사용자 정보를 별도의 저장소에 두고 관리(인메모리 또는 DB)
     - 여기서 두 구현 모두 사용자의 정보를 검색해오기 위해, UserDetailsService가 필요하다.
 
+---
+
+## 3. 로그인 및 RememberMeServices 동작
+![remember-me-2](./imgs/remember-me-2.png)
+
+- 앞서 학습한 UsernamePasswordAuthenticationFilter 에서 RememberMeServices.loginSuccess 가 호출되고 
+기억하기 처리가 시작됨.
+  - 기억하기 설정을 안 하면 NullAuthenticationServices가 사용되어 아무 것도 안 함
+
+### 3.2 AbstractRememberMeServices
+```java
+	@Override
+	public void loginSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication successfulAuthentication) {
+		if (!rememberMeRequested(request, this.parameter)) {
+			this.logger.debug("Remember-me login not requested.");
+			return;
+		}
+		onLoginSuccess(request, response, successfulAuthentication);
+	}
+
+    protected boolean rememberMeRequested(HttpServletRequest request, String parameter) {
+      if (this.alwaysRemember) {
+        return true;
+      }
+      String paramValue = request.getParameter(parameter);
+      if (paramValue != null) {
+        if (paramValue.equalsIgnoreCase("true") || paramValue.equalsIgnoreCase("on")
+                || paramValue.equalsIgnoreCase("yes") || paramValue.equals("1")) {
+          return true;
+        }
+      }
+      this.logger.debug(
+              LogMessage.format("Did not send remember-me cookie (principal did not set parameter '%s')", parameter));
+      return false;
+    }
+
+    protected abstract void onLoginSuccess(HttpServletRequest request, HttpServletResponse response,
+                                           Authentication successfulAuthentication);
+```
+- 추상 골격 클래스인 AbstractRememberMeServices 에서 remember-me 처리를 해야할 지 판단하고, 하위 클래스에게 처리를 위임
+
+### 3.3 TokenBasedRememberMeServices
+```java
+    @Override
+    public void onLoginSuccess(HttpServletRequest request, HttpServletResponse response,
+                               Authentication successfulAuthentication) {
+      String username = retrieveUserName(successfulAuthentication);
+      String password = retrievePassword(successfulAuthentication);
+      // If unable to find a username and password, just abort as
+      // TokenBasedRememberMeServices is
+      // unable to construct a valid token in this case.
+      if (!StringUtils.hasLength(username)) {
+        this.logger.debug("Unable to retrieve username");
+        return;
+      }
+      if (!StringUtils.hasLength(password)) {
+        UserDetails user = getUserDetailsService().loadUserByUsername(username);
+        password = user.getPassword();
+        if (!StringUtils.hasLength(password)) {
+          this.logger.debug("Unable to obtain password for user: " + username);
+          return;
+        }
+      }
+      int tokenLifetime = calculateLoginLifetime(request, successfulAuthentication);
+      long expiryTime = System.currentTimeMillis();
+      // SEC-949
+      expiryTime += 1000L * ((tokenLifetime < 0) ? TWO_WEEKS_S : tokenLifetime);
+      String signatureValue = makeTokenSignature(expiryTime, username, password, this.encodingAlgorithm);
+      setCookie(new String[] { username, Long.toString(expiryTime), this.encodingAlgorithm.name(), signatureValue },
+              tokenLifetime, request, response);
+      if (this.logger.isDebugEnabled()) {
+        this.logger
+                .debug("Added remember-me cookie for user '" + username + "', expiry: '" + new Date(expiryTime) + "'");
+      }
+    }
+```
 ```text
 base64(username+":"+algorithmName+":"algorithmHex(username+":"+expirationTime+":"+password+":"+key))
 ```
@@ -55,12 +132,11 @@ base64(username+":"+algorithmName+":"algorithmHex(username+":"+expirationTime+":
   - key: remember-me 토큰의 수정을 방지하기 위한 개인 키
   - algorithmName: remember-me 토큰 서명을 생성하고 검증하는 데 사용되는 알고리즘(기본적으로 SHA-256 알고리즘을 사용)
 
-
 ---
 
-## 3. rememberMe() API 사용
+## 4. rememberMe() API 사용
 
-### 3.1 설정
+### 4.1 설정
 ```kotlin
 @EnableWebSecurity
 @Configuration
@@ -92,7 +168,7 @@ class SecurityConfig(
 ```
 - SecurityFilterChain 구성 시 RememberMe 설정을 할 수 있다.
 
-### 결과
+### 4.2 결과
 - 로그인 후 로그인 쿠키를 제거하더라도, 새로고침하면 다시 인증에 성공하고 로그인 쿠키가 재발급된다.
 
 ---
