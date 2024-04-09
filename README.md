@@ -26,7 +26,7 @@
 - <a href="/note/authentication-process/Basic 인증 - httpBasic().md" target="_blank">Basic 인증 - httpBasic()</a>
 - <a href="/note/authentication-process/Basic 인증 필터 - BasicAuthenticationFilter.md" target="_blank">Basic 인증 필터 - BasicAuthenticationFilter</a>
 - <a href="/note/authentication-process/기억하기 인증 - rememberMe().md" target="_blank">기억하기 인증 - rememberMe()</a>
-- 리멤버미 인증 필터 - RememberMeAuthenticationFilter
+- <a href="/note/authentication-process/기억하기 인증 필터 - RememberMeAuthenticationFilter.md" target="_blank">기억하기 인증 필터 - RememberMeAuthenticationFilter</a>
 - 익명인증 사용자 - anonymous()
 - 로그아웃 - logout()
 - 요청 캐시 - RequestCache / SavedRequest
@@ -38,7 +38,6 @@
 <h2 id="api-filter">스프링 시큐리티 기본 API 및 Filter 이해</h2>
 
 - <a href="/note/로그아웃 처리, Logout Filter.md" target="_blank">로그아웃 처리, Logout Filter</a>
-- <a href="/note/RememberMe 인증.md" target="_blank">RememberMe 인증</a>
 - <a href="/note/동시세션 제어.md" target="_blank">동시세션 제어</a>
 - <a href="/note/세션고정 보호.md" target="_blank">세션고정 보호</a>
 - <a href="/note/세션생성 정책.md" target="_blank">세션생성 정책</a>
