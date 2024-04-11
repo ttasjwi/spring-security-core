@@ -28,7 +28,7 @@
 - <a href="/note/authentication-process/기억하기 인증 - rememberMe().md" target="_blank">기억하기 인증 - rememberMe()</a>
 - <a href="/note/authentication-process/기억하기 인증 필터 - RememberMeAuthenticationFilter.md" target="_blank">기억하기 인증 필터 - RememberMeAuthenticationFilter</a>
 - <a href="/note/authentication-process/익명 사용자 - anonymous().md" target="_blank">익명 사용자 - anonymous()</a>
-- 로그아웃 - logout()
+- <a href="/note/authentication-process/로그아웃 - logout().md" target="_blank">로그아웃 - logout()</a>
 - 요청 캐시 - RequestCache / SavedRequest
 
 ---
