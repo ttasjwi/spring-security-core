@@ -8,12 +8,6 @@ import org.springframework.web.bind.annotation.RestController
 class HelloController {
 
     @GetMapping("/")
-    fun index(): String {
-        return "root"
-    }
+    fun index() = "index"
 
-    @GetMapping("/logoutSuccess")
-    fun logoutSuccess(): String {
-        return "logoutSuccess"
-    }
 }

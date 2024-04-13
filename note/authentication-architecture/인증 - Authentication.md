@@ -1,5 +1,5 @@
 <nav>
-    <a href="/#architecture" target="_blank">[Spring Security Core]</a>
+    <a href="/#authentication-architecture" target="_blank">[Spring Security Core]</a>
 </nav>
 
 # 인증 개념 이해 - Authentication
@@ -32,11 +32,32 @@ public interface Authentication extends Principal, Serializable {
   - details : 인증 부가 정보
   - authenticated :  인증 여부
 
+## 참고: Principal
+```java
+package java.security;
+
+import javax.security.auth.Subject;
+
+public interface Principal {
+    
+    boolean equals(Object another);
+    String toString();
+    int hashCode();
+    String getName();
+    default boolean implies(Subject subject) {
+        if (subject == null)
+            return false;
+        return subject.getPrincipals().contains(this);
+    }
+}
+```
+- Principal은 java.util.security에서 제공되는 자바 사양의 인증 객체이다.
+- Spring Security의 Principal은 이것의 하위 인터페이스이다.
+
 ---
 
 ## 2. 인증 흐름
 ![authentication-1](./imgs/authentication-1.png)
-
 - 사용자는 로그인 요청을 한다.
   - 이 때 아이디, 패스워드를 파라미터를 통해 전달한다.
 - UsernamePasswordAuthenticationFilter에서 요청을 가로채서, 아이디/패스워드를 Authentication 객체에 담아둔다.
@@ -50,8 +71,8 @@ public interface Authentication extends Principal, Serializable {
   - Credentials : —-
   - authorities : `[Role.ADMIN]`
   - authenticated : true
-- Authentication은 SecurityContextHolder를 통해 현재 SecurityContext에 저장된다.
-  - 이 과정에서는 ThreadLocal 이 사용된다. 따라서 해당 스레드의 요청-응답 처리 사이에 인증 객체를 전역적으로 꺼내서 사용할 수 있다.
+- Authentication은 SecurityContextHolderStrategy를 통해 저장된다.
+  - 이 과정에서는 ThreadLocal 이 사용된다. 이후에는 해당 스레드의 요청-응답 처리 사이에 인증 객체를 전역적으로 꺼내서 사용할 수 있다.
 - 인증이 실패되면 인증 예외가 발생된다. 이런 인증 실패 후속처리는 주로 AuthenticationFailureHandler에서 후속처리를 한다.
 - 인증에 성공하면 인증 성공처리는 주로 AuthenticationSuccessHandler에서 후속처리를 한다.
 
@@ -61,7 +82,7 @@ public interface Authentication extends Principal, Serializable {
 ### 3.1 설정
 ```kotlin
 @RestController
-class SecurityController {
+class HelloController {
 
     @GetMapping("/")
     fun index() = "index"
