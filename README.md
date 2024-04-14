@@ -36,7 +36,7 @@
 <h2 id="authentication-architecture">인증 아키텍쳐</h2>
 
 - <a href="/note/authentication-architecture/인증 - Authentication.md" target="_blank">인증 - Authentication</a>
-- 인증 컨텍스트 - SecurityContext, SecurityContextHolderStrategy, SecurityContextHolder
+- <a href="/note/authentication-architecture/인증 컨텍스트 - SecurityContext, SecurityContextHolderStrategy, SecurityContextHolder.md" target="_blank">인증 컨텍스트 - SecurityContext, SecurityContextHolderStrategy, SecurityContextHolder</a>
 - 인증 관리자 - AuthenticationManager
 - 인증 제공자 - AuthenticationProvider
 - 사용자 상세 서비스 - UserDetailsService
@@ -86,6 +86,7 @@
 이하는 구버전
 
 <h2 id="api-filter">스프링 시큐리티 기본 API 및 Filter 이해</h2>
+
 - <a href="/note/동시세션 제어.md" target="_blank">동시세션 제어</a>
 - <a href="/note/세션고정 보호.md" target="_blank">세션고정 보호</a>
 - <a href="/note/세션생성 정책.md" target="_blank">세션생성 정책</a>
@@ -98,6 +99,5 @@
 
 <h2 id="architecture">스프링 시큐리티 주요 아키텍처 이해</h2>
 - <a href="/note/architecture/다중 SecurityFilterChain.md" target="_blank">다중 SecurityFilterChain</a>
-- <a href="/note/architecture/SecurityContextHolder - 요청 사이클 동안 SecurityContext 홀딩.md" target="_blank">SecurityContextHolder - 요청 사이클 동안 SecurityContext 홀딩</a>
 
 ---

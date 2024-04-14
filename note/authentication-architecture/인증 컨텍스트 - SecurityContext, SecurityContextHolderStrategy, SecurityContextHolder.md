@@ -1,8 +1,8 @@
 <nav>
-    <a href="/#architecture" target="_blank">[Spring Security Core]</a>
+    <a href="/#authentication-architecture" target="_blank">[Spring Security Core]</a>
 </nav>
 
-# SecurityContextHolder - 요청 사이클 동안 SecurityContext 홀딩
+# 인증 컨텍스트 - SecurityContext, SecurityContextHolderStrategy, SecurityContextHolder
 
 ---
 
@@ -15,7 +15,7 @@
 
 ### 1.2 SecurityContextHolder 및 SecurityContextHolderStrategy
 ```kotlin
-val authentication = SecurityContextHolder.getContext().getAuthentication()
+val authentication = SecurityContextHolder.getContextHolderStrategy().context
 ```
 ```java
 public class SecurityContextHolder {
@@ -69,58 +69,71 @@ public class SecurityContextHolder {
     - `MODE_GLOBAL` : 응용 프로그램에서 단 하나의 SecurityContext를 저장한다.
         - 정적 필드를 모든 스레드에서 공유하게 됨
     - 처음 객체 생성시 설정의 `spring.security.strategy` 프로퍼티 값에 따라 전략이 초기화된다.
-    값을 따로 설정하지 않았다면 `MODE_THREADLOCAL`이 전략으로 선택된다. 런타임에 이 전략은 동적으로 수정이 가능하다. (setStrategyName)
+      값을 따로 설정하지 않았다면 `MODE_THREADLOCAL`이 전략으로 선택된다. 런타임에 이 전략은 동적으로 수정이 가능하다. (setStrategyName)
 - 이 클래스를 통해 저장, 조회, 삭제가 요청되면 strategy에게 처리가 위임된다.
 - `SecurityContextHolder.clearContext()` : SecurityContext 기존 정보 초기화
 
 ---
 
-## 2. SecurityContext 관리 흐름
+## 2. SecurityContextHolderStrategy 사용
+- 참고: https://docs.spring.io/spring-security/reference/servlet/authentication/session-management.html#use-securitycontextholderstrategy
+
+### 2.1 기존 방식
+```java
+SecurityContext context = SecurityContextHolder.createEmptyContext();
+context.setAuthentication(authentication);
+SecurityContextHolder.setContext(context);
+```
+- SecurityContextHolder 의 정적 메서드들은 여러 스레드에서 사용될 수 있다.
+- 위 코드는 SecurityContextHolder를 통해 SecurityContext에 정적으로 접근할 때 여러 애플리케이션 컨텍스트가 SecurityContextHolderStrategy 를 지정하려고 할 때
+여러 경쟁 조건을 발생시킬 수 있다.
+  - 애플리케이션 내에서 여러 개의 애플리케이션 컨텍스트를 사용하는 경우
+
+### 2.2 권장 방식
+```java
+SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContxtHolderStrategy();
+SecurityContext context = securityContextHolderStrategy.createEmptyContext();
+context.setAuthentication(authentication);
+securityContextHolderStrategy.setContext(context);
+```
+- 애플리케이션이 SecurityContextHolder 내에 저장된 context로 정적으로 접근하는 대신, SecurityContextHolderStrategy 를 통해 얻어올 수 있게 한다.
+- 각 애플리케이션 컨텍스트가 자신에게 가장 적합한 보안 전략을 사용할 수 있게된다.
+
+---
+
+## 3. SecurityContext 관리 흐름
 ![security-context-holder-1](./imgs/security-context-holder-1.png)
 
 AbstractAuthenticationProcessingFilter 기준
 - 로그인에 실패하면 SecurityContextHolder의 컨텍스트를 초기화한다.
 - 로그인에 성공하면
-  - SecurityContextHolderStrategy를 통해 SecurityContext를 저장한다. 이 안에는 Authentication 객체가 저장되고 그 내부적으로는 UserDetails 등이 저장되어진다.
-  기본적으로 ThreadLocal을 사용하는 전략이기 때문에 같은 스레드 요청 흐름내에서 전역적으로 꺼내서 사용할 수 있다.
-  - SecurityContextHolder는 SecurityContextHolderStrategy를 알고 있다. 이후에는 SecurityContextHolder를 통해 인증 객체에 접근할 수 있다.
+    - SecurityContextHolderStrategy를 통해 SecurityContext를 저장한다. 이 안에는 Authentication 객체가 저장되고 그 내부적으로는 UserDetails 등이 저장되어진다.
+      기본적으로 ThreadLocal을 사용하는 전략이기 때문에 같은 스레드 요청 흐름내에서 전역적으로 꺼내서 사용할 수 있다.
+    - SecurityContextHolder는 SecurityContextHolderStrategy를 알고 있다. 이후에는 SecurityContextHolder를 통해 인증 객체에 접근할 수 있다.
 - 참고로 세션이 활성화되어 있을 경우, SecurityContextHolderRepository에도 저장된다. 장기 저장을 위한 컴포넌트인데 세션이 활성화됐다면
-세션에도 SecuriyContext가 보관된다. 이때 세션에 저장되는 SecurityContext의 key는 "SPRING_SECURITY_CONTEXT"(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY)
-이다. SecurityContextRepository에 대해서는 뒤에서 자세히 다룬다.
+  세션에도 SecuriyContext가 보관된다. 이때 세션에 저장되는 SecurityContext의 key는 "SPRING_SECURITY_CONTEXT"(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY)
+  이다. SecurityContextRepository에 대해서는 뒤에서 자세히 다룬다.
 
 ---
 
-## 3. 실습
+## 4. 실습
 
-### 3.1 컨트롤러 설정
+### 4.1 컨트롤러 설정
 ```kotlin
-package com.security.core.controller
-
-import com.security.core.util.getLogger
-import jakarta.servlet.http.HttpSession
-import org.springframework.security.core.context.SecurityContext
-import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository
-import org.springframework.security.web.context.SecurityContextRepository
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RestController
-
 @RestController
-class SecurityController(
-
-) {
+class HelloController {
 
     private val log = getLogger(javaClass)
 
     @GetMapping("/thread")
     fun thread(): String {
-        val firstThreadContext = SecurityContextHolder.getContext()
+        val firstThreadContext = SecurityContextHolder.getContextHolderStrategy().context
         val firstThreadAuthentication = firstThreadContext.authentication
 
         log.info { "firstThreadContext = $firstThreadContext"}
         log.info { "firstThreadAuthentication = $firstThreadAuthentication" }
         Thread {
-            val secondThreadContext = SecurityContextHolder.getContext()
+            val secondThreadContext = SecurityContextHolder.getContextHolderStrategy().context
             val secondThreadAuthentication = secondThreadContext.authentication
 
             log.info { "secondThreadContext = $secondThreadContext" }
@@ -133,7 +146,7 @@ class SecurityController(
 
     @GetMapping("/session-security-context-repository")
     fun repo(session: HttpSession): String {
-        val holderContext = SecurityContextHolder.getContext()
+        val holderContext = SecurityContextHolder.getContextHolderStrategy().context
         val holderAuthentication = holderContext.authentication
 
         val sessionRepositoryContext = session.getAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY) as SecurityContext
@@ -146,7 +159,7 @@ class SecurityController(
         log.info { "sessionAuthentication = $sessionAuthentication" }
         log.info { "isSameContext = ${holderContext === sessionRepositoryContext}" }
         log.info { "isSameAuthentication = ${holderAuthentication === sessionAuthentication}" }
-        
+
         return "session"
     }
 
@@ -155,8 +168,9 @@ class SecurityController(
 - `/thread` : SecurityContextHolderStrategy 에 따라 각 스레드별 SecurityContext, Authentication의 참조가 같은지 조회
 - `/session-security-context-repository`: SecurityContextHolder에 저장된 컨텍스트와, HttpSession에 저장된 컨텍스트가 같은지 조회
 
-### 3.2 설정
+### 4.2 설정
 ```kotlin
+@EnableWebSecurity
 @Configuration
 class SecurityConfig {
 
@@ -176,12 +190,12 @@ class SecurityConfig {
 - 폼 로그인 활성화
 
 
-### 3.3 디버깅
+### 4.3 디버깅
 
 ![security-context-holder-2](./imgs/security-context-holder-2.png)
 
 - 애플리케이션 로딩 과정에서 SecurityContextHolder의 기본 전략이 MODE_THREADLOCAL 로 설정된다.
-  - 설정값이 따로 없으면 MODE_THREADLOCAL(-> ThreadLocalSecurityContextStrategy) 로 초기화된다.
+    - 설정값이 따로 없으면 MODE_THREADLOCAL(-> ThreadLocalSecurityContextStrategy) 로 초기화된다.
 
 ![security-context-holder-3](./imgs/security-context-holder-3.png)
 
@@ -189,10 +203,10 @@ class SecurityConfig {
 
 
 - 폼 인증에 성공하면 AbstractAuthenticationProcessingFilter 에서 인증 성공 후속처리가 진행된다.
-  - SecurityContext에 인증 객체를 담고, SecurityContextHolderStrategy를 통해 저장한다. SecurityContextHolder는 SecurityContextHolderStrategy를
-  알고 있으므로, 이후부터는 해당 요청 사이클 내에서 SecurityContextHolder를 통해 SecurityContext 및 Authentication을 꺼내올 수 있다.
-  - SecurityContextRepository에 SecurityContext를 저장한다.
-    - 세션방식이므로 HttpSessionSecurityContextHolder를 통해 인증을 저장한다.
+    - SecurityContext에 인증 객체를 담고, SecurityContextHolderStrategy를 통해 저장한다. SecurityContextHolder는 SecurityContextHolderStrategy를
+      알고 있으므로, 이후부터는 해당 요청 사이클 내에서 SecurityContextHolder를 통해 SecurityContext 및 Authentication을 꺼내올 수 있다.
+    - SecurityContextRepository에 SecurityContext를 저장한다.
+        - 세션방식이므로 HttpSessionSecurityContextHolder를 통해 인증을 저장한다.
 - 전역적으로 SecurityContextHolder를 통해 SecurityContext를 꺼내오고, 여기서 Authentication을 꺼내올 수 있게 됐다.
 
 ![security-context-holder-5](./imgs/security-context-holder-5.png)
@@ -207,8 +221,8 @@ isSameAuthentication = true
 ```
 
 `/session-security-context-repository` 로 요청 후 로그인을 하였을 때,
-  - SecurityContextHolder 및 세션에 저장된 SecurityContext 를 조회하여 비교한다.
-  - 둘은 참조가 같은 것을 알 수 있다.
+- SecurityContextHolder 및 세션에 저장된 SecurityContext 를 조회하여 비교한다.
+- 둘은 참조가 같은 것을 알 수 있다.
 
 ![security-context-holder-6](./imgs/security-context-holder-6.png)
 
@@ -222,8 +236,8 @@ isSameAuthentication = false
 ```
 
 `/thread` 로 요청 후 로그인을 하였을 때
-  - 스레드1에서 스레드2를 만들고 각각 SecurityContextHolder를 통해 SecurityContext를 조회한다.
-  - 기본 SecurityContextHolderStrategy는 ThreadLocalContextHolderStrategy 라서, 파생된 스레드에서는 같은 SecurityContext를 사용하지 않고
+- 스레드1에서 스레드2를 만들고 각각 SecurityContextHolder를 통해 SecurityContext를 조회한다.
+- 기본 SecurityContextHolderStrategy는 ThreadLocalContextHolderStrategy 라서, 파생된 스레드에서는 같은 SecurityContext를 사용하지 않고
   인증 객체 Authentication도 공유되지 않는다.
 
 ```kotlin
