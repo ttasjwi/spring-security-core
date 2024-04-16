@@ -37,7 +37,7 @@
 
 - <a href="/note/authentication-architecture/인증 - Authentication.md" target="_blank">인증 - Authentication</a>
 - <a href="/note/authentication-architecture/인증 컨텍스트 - SecurityContext, SecurityContextHolderStrategy, SecurityContextHolder.md" target="_blank">인증 컨텍스트 - SecurityContext, SecurityContextHolderStrategy, SecurityContextHolder</a>
-- 인증 관리자 - AuthenticationManager
+- <a href="/note/authentication-architecture/인증 관리자 - AuthenticationManager.md" target="_blank">인증 관리자 - AuthenticationManager</a>
 - 인증 제공자 - AuthenticationProvider
 - 사용자 상세 서비스 - UserDetailsService
 - 사용자 상세 - UserDetails
