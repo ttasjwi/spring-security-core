@@ -45,7 +45,8 @@
 ---
 
 <h2 id="authentication-persistence">인증 상태 영속성</h2>
-- SecurityContextRepository & SecurityContextHolderFilter
+
+- <a href="/note/authentication-persistence/SecurityContextRepository & SecurityContextHolderFilter.md" target="_blank">SecurityContextRepository & SecurityContextHolderFilter</a>
 - 스프링 MVC 로그인 구현
 
 ---
