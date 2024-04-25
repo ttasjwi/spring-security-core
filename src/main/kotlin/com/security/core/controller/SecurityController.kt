@@ -1,27 +1,22 @@
 package com.security.core.controller
 
-import jakarta.servlet.http.HttpSession
+import com.security.core.util.getLogger
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.annotation.CurrentSecurityContext
+import org.springframework.security.core.context.SecurityContext
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class SecurityController {
 
+    private val log = getLogger(javaClass)
+
     @GetMapping("/")
-    fun index(session: HttpSession) : String {
-        println("=======================")
-        println("/ 로 접속")
-        println("Session id = ${session.id}")
-        println("Session = $session")
-        return "home"
+    fun home(@CurrentSecurityContext securityContext: SecurityContext): Authentication {
+        val authentication = securityContext.authentication
+        log.info { "authentication = $authentication" }
+        return authentication
     }
 
-    @GetMapping("/hello")
-    fun hello(session: HttpSession) : String {
-        println("=======================")
-        println("/hello 로 접속")
-        println("Session id = ${session.id}")
-        println("Session = $session")
-        return "hello"
-    }
 }

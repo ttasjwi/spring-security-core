@@ -55,7 +55,7 @@ f# Spring-Security-Core
 
 - <a href="/note/session-management/동시 세션 제어.md" target="_blank">동시 세션 제어</a>
 - <a href="/note/session-management/세션고정 보호.md" target="_blank">세션고정 보호</a>
-- 세션 정책
+- <a href="/note/session-management/세션생성 정책.md" target="_blank">세션생성 정책</a>
 - SessionManagementFilter & ConcurrentSessionFilter
 
 ---
