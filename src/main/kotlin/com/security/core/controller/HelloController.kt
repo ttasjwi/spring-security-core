@@ -1,7 +1,6 @@
 package com.security.core.controller
 
 import com.security.core.util.getLogger
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.annotation.CurrentSecurityContext
 import org.springframework.security.core.context.SecurityContext

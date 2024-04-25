@@ -1,4 +1,4 @@
-# Spring-Security-Core
+f# Spring-Security-Core
 - 강의 링크 : <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%99%84%EC%A0%84%EC%A0%95%EB%B3%B5" target="_blank">스프링 시큐리티 완전 정복</a>
 
 ---
@@ -53,6 +53,10 @@
 
 <h2 id="sesion-management">세션 관리</h2>
 
+- <a href="/note/session-management/동시 세션 제어.md" target="_blank">동시 세션 제어</a>
+- 세션 고정 보호
+- 세션 정책
+- SessionManagementFilter & ConcurrentSessionFilter
 
 ---
 
@@ -87,8 +91,6 @@
 이하는 구버전
 
 <h2 id="api-filter">스프링 시큐리티 기본 API 및 Filter 이해</h2>
-
-- <a href="/note/동시세션 제어.md" target="_blank">동시세션 제어</a>
 - <a href="/note/세션고정 보호.md" target="_blank">세션고정 보호</a>
 - <a href="/note/세션생성 정책.md" target="_blank">세션생성 정책</a>
 - <a href="/note/세션 제어 관련 필터 및 세션인증 전략(SessionAuthenticationStrategy).md" target="_blank">세션 제어 관련 필터 및 세션인증 전략(SessionAuthenticationStrategy)</a>
