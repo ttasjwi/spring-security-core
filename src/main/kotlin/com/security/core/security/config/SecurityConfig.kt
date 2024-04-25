@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.session.SessionRegistry
+import org.springframework.security.core.session.SessionRegistryImpl
 import org.springframework.security.web.SecurityFilterChain
 
 @EnableWebSecurity
@@ -20,10 +22,20 @@ class SecurityConfig {
             }
             formLogin {  }
             sessionManagement {
-                sessionCreationPolicy = SessionCreationPolicy.IF_REQUIRED // 기본값
+                sessionConcurrency {
+                    maximumSessions = 2
+                    maxSessionsPreventsLogin = false
+                }
+                sessionFixation {
+                    newSession()
+                }
             }
         }
         return http.build()
     }
 
+    @Bean
+    fun sessionRegistry(): SessionRegistry {
+        return SessionRegistryImpl()
+    }
 }

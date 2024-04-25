@@ -56,7 +56,7 @@ f# Spring-Security-Core
 - <a href="/note/session-management/동시 세션 제어.md" target="_blank">동시 세션 제어</a>
 - <a href="/note/session-management/세션고정 보호.md" target="_blank">세션고정 보호</a>
 - <a href="/note/session-management/세션생성 정책.md" target="_blank">세션생성 정책</a>
-- SessionManagementFilter & ConcurrentSessionFilter
+- <a href="/note/session-management/세션인증 전략(SessionAuthenticationStrategy) 및 세션관련 필터.md" target="_blank">세션인증 전략(SessionAuthenticationStrategy) 및 세션관련 필터</a>
 
 ---
 
@@ -91,9 +91,6 @@ f# Spring-Security-Core
 이하는 구버전
 
 <h2 id="api-filter">스프링 시큐리티 기본 API 및 Filter 이해</h2>
-
-- <a href="/note/세션생성 정책.md" target="_blank">세션생성 정책</a>
-- <a href="/note/세션 제어 관련 필터 및 세션인증 전략(SessionAuthenticationStrategy).md" target="_blank">세션 제어 관련 필터 및 세션인증 전략(SessionAuthenticationStrategy)</a>
 - <a href="/note/인가 API - 권한설정과 표현식.md" target="_blank">인가 API - 권한설정과 표현식</a>
 - <a href="/note/예외 처리 및 요청 캐시 필터 - ExceptionTranslationFilter, RequestCacheAwareFilter.md" target="_blank">예외 처리 및 요청 캐시 필터 - ExceptionTranslationFilter, RequestCacheAwareFilter</a>
 - <a href="/note/사이트 간 요청 위조 - CSRF, CsrfFilter.md" target="_blank">사이트 간 요청 위조 - CSRF, CsrfFilter</a>
