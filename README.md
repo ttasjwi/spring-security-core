@@ -62,6 +62,9 @@ f# Spring-Security-Core
 
 <h2 id="exception-handling">예외 처리</h2>
 
+- <a href="/note/exception-handling/스프링 시큐리티 예외 및 처리 API.md" target="_blank">스프링 시큐리티 예외 및 처리 API</a>
+- ExceptionTranslationFilter
+
 ---
 
 <h2 id="exploit-protection">악용 보호</h2>
