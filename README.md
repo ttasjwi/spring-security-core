@@ -63,7 +63,7 @@ f# Spring-Security-Core
 <h2 id="exception-handling">예외 처리</h2>
 
 - <a href="/note/exception-handling/스프링 시큐리티 예외 및 처리 API.md" target="_blank">스프링 시큐리티 예외 및 처리 API</a>
-- ExceptionTranslationFilter
+- <a href="/note/exception-handling/ExceptionTranslationFilter.md" target="_blank">ExceptionTranslationFilter</a>
 
 ---
 
@@ -94,8 +94,8 @@ f# Spring-Security-Core
 이하는 구버전
 
 <h2 id="api-filter">스프링 시큐리티 기본 API 및 Filter 이해</h2>
+
 - <a href="/note/인가 API - 권한설정과 표현식.md" target="_blank">인가 API - 권한설정과 표현식</a>
-- <a href="/note/예외 처리 및 요청 캐시 필터 - ExceptionTranslationFilter, RequestCacheAwareFilter.md" target="_blank">예외 처리 및 요청 캐시 필터 - ExceptionTranslationFilter, RequestCacheAwareFilter</a>
 - <a href="/note/사이트 간 요청 위조 - CSRF, CsrfFilter.md" target="_blank">사이트 간 요청 위조 - CSRF, CsrfFilter</a>
 
 ---
