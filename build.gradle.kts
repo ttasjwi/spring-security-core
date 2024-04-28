@@ -3,50 +3,63 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version PluginVersions.SPRING_BOOT_VERSION
     id("io.spring.dependency-management") version PluginVersions.DEPENDENCY_MANAGER_VERSION
-
-    id("org.jetbrains.kotlin.kapt") version PluginVersions.KAPT_VERSION
-    kotlin("jvm") version PluginVersions.JVM_VERSION
-    kotlin("plugin.spring") version PluginVersions.SPRING_PLUGIN_VERSION
-    kotlin("plugin.jpa") version PluginVersions.JPA_PLUGIN_VERSION
+    id("org.jetbrains.kotlin.jvm") version PluginVersions.JVM_VERSION
+    id("org.jetbrains.kotlin.plugin.spring") version PluginVersions.SPRING_PLUGIN_VERSION
 }
-
-group = "com.security"
-version = "0.0.1-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
 }
 
-repositories {
-    mavenCentral()
+allprojects {
+    group = "com.security"
+    version = "0.0.1-SNAPSHOT"
+
+    repositories {
+        mavenCentral()
+    }
 }
 
-dependencies {
-    // kotlin
-    implementation(Dependencies.KOTLIN_REFLECT)
-    implementation(Dependencies.KOTLIN_JDK)
+subprojects {
+    apply { plugin("org.jetbrains.kotlin.jvm") }
+    apply { plugin("org.jetbrains.kotlin.plugin.spring") }
+    apply { plugin("org.springframework.boot") }
+    apply { plugin("io.spring.dependency-management") }
 
-    // spring
-    implementation(Dependencies.SPRING_VALIDATION)
-    implementation(Dependencies.SPRING_WEB)
 
-    // thymeleaf
-    implementation(Dependencies.THYMELEAF)
-    implementation(Dependencies.THYMELEAF_EXTRAS)
+    dependencies {
+        // kotlin
+        implementation(Dependencies.KOTLIN_REFLECT)
+        implementation(Dependencies.KOTLIN_JDK)
 
-    // spring security
-    implementation(Dependencies.SPRING_SECURITY)
-    testImplementation(Dependencies.SPRING_SECURITY_TEST)
+        // spring
+        implementation(Dependencies.SPRING_VALIDATION)
+        implementation(Dependencies.SPRING_WEB)
 
-    // json
-    implementation(Dependencies.JACKSON)
+        // thymeleaf
+        implementation(Dependencies.THYMELEAF)
+        implementation(Dependencies.THYMELEAF_EXTRAS)
 
-    // logging
-    implementation(Dependencies.KOTLIN_LOGGING)
+        // json
+        implementation(Dependencies.JACKSON)
 
-    // test
-    testImplementation(Dependencies.SPRING_TEST)
+        // logging
+        implementation(Dependencies.KOTLIN_LOGGING)
+
+        // test
+        testImplementation(Dependencies.SPRING_TEST)
+    }
+
+    tasks.getByName("bootJar") {
+        enabled = false
+    }
+
+    tasks.getByName("jar") {
+        enabled = true
+    }
+
 }
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

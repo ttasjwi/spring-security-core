@@ -1,4 +1,4 @@
-f# Spring-Security-Core
+# Spring-Security-Core
 - 강의 링크 : <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%99%84%EC%A0%84%EC%A0%95%EB%B3%B5" target="_blank">스프링 시큐리티 완전 정복</a>
 
 ---
@@ -69,25 +69,61 @@ f# Spring-Security-Core
 
 <h2 id="exploit-protection">악용 보호</h2>
 
+- <a href="/note/exploit-protection/CORS(Cross Origin Resource Sharing, 교차 출처 리소스 공유).md" target="_blank">CORS(Cross Origin Resource Sharing, 교차 출처 리소스 공유)</a>
+- CSRF(Cross Site Request Forgery)
+- CSRF 토큰 유지 및 검증
+- CSRF 통합
+- Csrf 필터
+- SameSite
+
 ---
 
 <h2 id="authorization-process">인가 프로세스</h2>
+
+- 요청 기반 권한 부여
+- 메서드 기반 권한 부여
+- 정적 자원 관리
+- 계층적 권한
 
 ---
 
 <h2 id="authorization-architecture">인가 아키텍쳐</h2>
 
+- 인가 - Authorization
+- 인가 부여 관리자 - AuthorizationManager
+- 포인트 컷 메서드 보안 구현
+- AOP 메서드 보안
+- 인가 필터 - AuthorizationFilter
+
+
 ---
 
 <h2 id="event-handling">이벤트 처리</h2>
+
+- Authentication Events
+- Authorization Events
 
 ---
 
 <h2 id="integration">통합하기</h2>
 
+- Servlet API 통합
+- Spring MVC 통합
+
 ---
 
 <h2 id="advanced-config">고급 설정</h2>
+
+- 다중 보안 설정
+- Custom DSL
+- 이중화 설정(Redis, ...)
+
+---
+
+<h2 id="project">실전 프로젝트</h2>
+
+- 회원 인증 시스템
+- 회원 관리 시스템
 
 ---
 
