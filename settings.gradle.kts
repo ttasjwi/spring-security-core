@@ -1,5 +1,5 @@
 rootProject.name = "spring-security-core"
 include(
-    "cors-1",
-    "cors-2"
+    "app",
+    "support:logging"
 )

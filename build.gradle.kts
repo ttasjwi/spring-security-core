@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version PluginVersions.SPRING_BOOT_VERSION
-    id("io.spring.dependency-management") version PluginVersions.DEPENDENCY_MANAGER_VERSION
-    id("org.jetbrains.kotlin.jvm") version PluginVersions.JVM_VERSION
-    id("org.jetbrains.kotlin.plugin.spring") version PluginVersions.SPRING_PLUGIN_VERSION
+    id(Plugins.SPRING_BOOT) version PluginVersions.SPRING_BOOT_VERSION
+    id(Plugins.SPRING_DEPENDENCY_MANAGEMENT) version PluginVersions.DEPENDENCY_MANAGER_VERSION
+    id(Plugins.KOTLIN_JVM) version PluginVersions.JVM_VERSION
+    id(Plugins.KOTLIN_SPRING) version PluginVersions.SPRING_PLUGIN_VERSION
 }
 
 java {
@@ -21,30 +21,16 @@ allprojects {
 }
 
 subprojects {
-    apply { plugin("org.jetbrains.kotlin.jvm") }
-    apply { plugin("org.jetbrains.kotlin.plugin.spring") }
-    apply { plugin("org.springframework.boot") }
-    apply { plugin("io.spring.dependency-management") }
+    apply { plugin(Plugins.KOTLIN_JVM) }
+    apply { plugin(Plugins.KOTLIN_SPRING) }
+    apply { plugin(Plugins.SPRING_BOOT) }
+    apply { plugin(Plugins.SPRING_DEPENDENCY_MANAGEMENT) }
 
 
     dependencies {
         // kotlin
         implementation(Dependencies.KOTLIN_REFLECT)
-        implementation(Dependencies.KOTLIN_JDK)
-
-        // spring
-        implementation(Dependencies.SPRING_VALIDATION)
-        implementation(Dependencies.SPRING_WEB)
-
-        // thymeleaf
-        implementation(Dependencies.THYMELEAF)
-        implementation(Dependencies.THYMELEAF_EXTRAS)
-
-        // json
-        implementation(Dependencies.JACKSON)
-
-        // logging
-        implementation(Dependencies.KOTLIN_LOGGING)
+        implementation(Dependencies.KOTLIN_JACKSON)
 
         // test
         testImplementation(Dependencies.SPRING_TEST)
