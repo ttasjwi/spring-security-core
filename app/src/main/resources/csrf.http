@@ -1,0 +1,12 @@
+### obtain csrfToken
+GET http://localhost:8080/csrf
+
+
+### with csrfToken
+POST http://localhost:8080/csrf
+Content-Type: application/json
+X-CSRF-TOKEN: G7eMntLuy-Vz5JeMMODlFKYRZzXGxibjCJHiLWuk9z8aq3X3fY-9-rOPqoRe0_TuVM3Rd5VySgz19kPOPqTUG1mWwAh_k0SU
+
+### Ignore CSrf
+POST http://localhost:8080/ignoreCsrf
+Content-Type: application/json
