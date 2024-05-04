@@ -3,10 +3,6 @@ GET http://localhost:8080/csrf
 
 
 ### with csrfToken
-POST http://localhost:8080/csrf
+POST http://localhost:8080/requireCsrf
 Content-Type: application/json
-X-CSRF-TOKEN: G7eMntLuy-Vz5JeMMODlFKYRZzXGxibjCJHiLWuk9z8aq3X3fY-9-rOPqoRe0_TuVM3Rd5VySgz19kPOPqTUG1mWwAh_k0SU
-
-### Ignore CSrf
-POST http://localhost:8080/ignoreCsrf
-Content-Type: application/json
+X-XSRF-TOKEN: [[여기에 받은 CSRF 토큰값을 전달하세요]]

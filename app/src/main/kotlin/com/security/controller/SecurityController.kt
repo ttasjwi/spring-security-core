@@ -16,15 +16,9 @@ class SecurityController {
         return csrfToken
     }
 
-    @PostMapping("/csrf")
-    fun csrf(): String {
+    @PostMapping("/requireCsrf")
+    fun requireCsrf(): String {
         log.info { "csrf 검증 거침" }
         return "csrf 적용됨"
-    }
-
-    @PostMapping("/ignoreCsrf")
-    fun ignoreCsrf(): String {
-        log.info { "csrf 검증 무시" }
-        return "csrf 무시됨"
     }
 }

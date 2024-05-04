@@ -71,7 +71,7 @@
 
 - <a href="/note/exploit-protection/CORS(Cross Origin Resource Sharing, 교차 출처 리소스 공유).md" target="_blank">CORS(Cross Origin Resource Sharing, 교차 출처 리소스 공유)</a>
 - <a href="/note/exploit-protection/CSRF(Cross Site Request Forgery, 사이트 간 요청 위조).md" target="_blank">CSRF(Cross Site Request Forgery, 사이트 간 요청 위조)</a>
-- CSRF 토큰 유지 및 검증
+- <a href="/note/exploit-protection/CsrfToken, CsrfTokenRepository, CsrfTokenRequestHandler.md" target="_blank">CsrfToken, CsrfTokenRepository, CsrfTokenRequestHandler</a>
 - CSRF 통합
 - Csrf 필터
 - SameSite
