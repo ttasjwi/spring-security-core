@@ -16,6 +16,9 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository
 import org.springframework.security.web.csrf.CsrfTokenRepository
 import org.springframework.security.web.csrf.CsrfTokenRequestHandler
 import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @EnableWebSecurity
 @Configuration
@@ -31,6 +34,9 @@ class SecurityConfig {
                 authorize(anyRequest, authenticated)
             }
             formLogin {}
+            cors {
+                configurationSource = corsConfigurationSource()
+            }
             csrf {
                 csrfTokenRequestHandler = csrfTokenRequestHandler()
                 csrfTokenRepository = csrfTokenRepository()
@@ -61,6 +67,20 @@ class SecurityConfig {
         val requestHandler = XorCsrfTokenRequestAttributeHandler()
         requestHandler.setCsrfRequestAttributeName(null)
         return requestHandler
+    }
+
+    @Bean
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val config = CorsConfiguration()
+        config.addAllowedOrigin("http://localhost:3000")
+        config.addAllowedMethod("*")
+        config.addAllowedHeader("*")
+        config.allowCredentials = true
+        config.maxAge = 3600L
+
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", config)
+        return source
     }
 
 }
