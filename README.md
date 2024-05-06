@@ -73,7 +73,7 @@
 - <a href="/note/exploit-protection/CSRF(Cross Site Request Forgery, 사이트 간 요청 위조).md" target="_blank">CSRF(Cross Site Request Forgery, 사이트 간 요청 위조)</a>
 - <a href="/note/exploit-protection/CsrfToken, CsrfTokenRepository, CsrfTokenRequestHandler.md" target="_blank">CsrfToken, CsrfTokenRepository, CsrfTokenRequestHandler</a>
 - <a href="/note/exploit-protection/CSRF 통합(클라이언트 + 백엔드).md" target="_blank">CSRF 통합(클라이언트 + 백엔드)</a>
-- Csrf 필터
+- <a href="/note/exploit-protection/CsrfFilter.md" target="_blank">CsrfFilter</a>
 - SameSite
 
 ---
@@ -132,7 +132,6 @@
 <h2 id="api-filter">스프링 시큐리티 기본 API 및 Filter 이해</h2>
 
 - <a href="/note/인가 API - 권한설정과 표현식.md" target="_blank">인가 API - 권한설정과 표현식</a>
-- <a href="/note/사이트 간 요청 위조 - CSRF, CsrfFilter.md" target="_blank">사이트 간 요청 위조 - CSRF, CsrfFilter</a>
 
 ---
 
