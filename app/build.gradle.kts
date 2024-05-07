@@ -5,6 +5,9 @@ dependencies {
     // security
     implementation(Dependencies.SPRING_SECURITY)
 
+    // session
+    implementation(Dependencies.SPRING_SESSION_CORE)
+
     // logging
     implementation(project(":support:logging"))
 }

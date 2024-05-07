@@ -74,7 +74,7 @@
 - <a href="/note/exploit-protection/CsrfToken, CsrfTokenRepository, CsrfTokenRequestHandler.md" target="_blank">CsrfToken, CsrfTokenRepository, CsrfTokenRequestHandler</a>
 - <a href="/note/exploit-protection/CSRF 통합(클라이언트 + 백엔드).md" target="_blank">CSRF 통합(클라이언트 + 백엔드)</a>
 - <a href="/note/exploit-protection/CsrfFilter.md" target="_blank">CsrfFilter</a>
-- SameSite
+- <a href="/note/exploit-protection/SameSite.md" target="_blank">SameSite</a>
 
 ---
 
