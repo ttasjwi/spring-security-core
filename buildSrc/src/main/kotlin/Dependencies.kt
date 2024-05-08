@@ -10,7 +10,7 @@ object Dependencies {
     // web
     const val SPRING_WEB = "org.springframework.boot:spring-boot-starter-web"
     const val THYMELEAF = "org.springframework.boot:spring-boot-starter-thymeleaf"
-    const val THYMELEAF_EXTRAS = "org.thymeleaf.extras:thymeleaf-extras-springsecurity6"
+    const val THYMELEAF_EXTRAS_SECURITY = "org.thymeleaf.extras:thymeleaf-extras-springsecurity6"
 
     // security
     const val SPRING_SECURITY = "org.springframework.boot:spring-boot-starter-security"
@@ -26,4 +26,3 @@ object Dependencies {
     const val SPRING_SECURITY_TEST = "org.springframework.security:spring-security-test"
 
 }
-

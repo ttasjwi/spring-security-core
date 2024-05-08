@@ -80,7 +80,7 @@
 
 <h2 id="authorization-process">인가 프로세스</h2>
 
-- 요청 기반 권한 부여
+- <a href="/note/authorization-process/요청 기반 권한 부여 - authorizeHttpRequests().md" target="_blank">요청 기반 권한 부여 - authorizeHttpRequests()</a>
 - 메서드 기반 권한 부여
 - 정적 자원 관리
 - 계층적 권한

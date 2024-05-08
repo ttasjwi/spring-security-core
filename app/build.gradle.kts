@@ -5,8 +5,11 @@ dependencies {
     // security
     implementation(Dependencies.SPRING_SECURITY)
 
-    // session
-    implementation(Dependencies.SPRING_SESSION_CORE)
+    // thymeleaf
+    implementation(Dependencies.THYMELEAF)
+
+    // thymeleaf
+    implementation(Dependencies.THYMELEAF_EXTRAS_SECURITY)
 
     // logging
     implementation(project(":support:logging"))
