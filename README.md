@@ -83,7 +83,7 @@
 - <a href="/note/authorization-process/요청 기반 권한 부여 - authorizeHttpRequests().md" target="_blank">요청 기반 권한 부여 - authorizeHttpRequests()</a>
 - <a href="/note/authorization-process/표현식 및 커스텀 권한 구현.md" target="_blank">표현식 및 커스텀 권한 구현</a>
 - <a href="/note/authorization-process/SecurityFilterChain 매칭 - securityMatcher().md" target="_blank">SecurityFilterChain 매칭 - securityMatcher()</a>
-- 메서드 기반 권한 부여
+- <a href="/note/authorization-process/메서드 기반 권한 부여 - 활성화.md" target="_blank">메서드 기반 권한 부여 - 활성화</a>
 - 정적 자원 관리
 - 계층적 권한
 
