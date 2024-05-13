@@ -23,6 +23,7 @@ class SecurityConfig {
                 authorize(anyRequest, authenticated)
             }
             formLogin {  }
+            csrf { disable() }
         }
         return http.build()
     }

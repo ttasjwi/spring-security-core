@@ -85,6 +85,7 @@
 - <a href="/note/authorization-process/SecurityFilterChain 매칭 - securityMatcher().md" target="_blank">SecurityFilterChain 매칭 - securityMatcher()</a>
 - <a href="/note/authorization-process/메서드 기반 권한 부여 - 활성화.md" target="_blank">메서드 기반 권한 부여 - 활성화</a>
 - <a href="/note/authorization-process/메서드 기반 권한 부여 - @PreAuthorize, @PostAuthorize.md" target="_blank">메서드 기반 권한 부여 - `@PreAuthorize`, `@PostAuthorize`</a>
+- <a href="/note/authorization-process/메서드 기반 권한 부여 - @PreFilter, @PostFilter.md" target="_blank">메서드 기반 권한 부여 - `@PreFilter`, `@PostFilter`</a>
 - 정적 자원 관리
 - 계층적 권한
 

@@ -32,6 +32,10 @@ subprojects {
         implementation(Dependencies.KOTLIN_REFLECT)
         implementation(Dependencies.KOTLIN_JACKSON)
 
+        // thymeleaf
+        implementation(Dependencies.THYMELEAF)
+        implementation(Dependencies.THYMELEAF_EXTRAS_SECURITY)
+
         // test
         testImplementation(Dependencies.SPRING_TEST)
     }

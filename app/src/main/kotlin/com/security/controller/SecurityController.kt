@@ -1,53 +1,40 @@
 package com.security.controller
 
-import com.security.controller.dto.AccountDto
-import org.springframework.security.access.prepost.PostAuthorize
-import org.springframework.security.access.prepost.PreAuthorize
+import com.security.domain.Account
+import com.security.domain.AccountService
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class SecurityController {
+class SecurityController(
+    private val accountService: AccountService
+) {
 
     @GetMapping("/")
     fun index(): String {
         return "index"
     }
 
-    @GetMapping("/admin")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    fun admin() : String {
-        return "admin"
+    @PostMapping("/writeList")
+    fun writeList(@RequestBody accounts: List<Account>): List<Account> {
+        return accountService.writeList(accounts)
     }
 
-    @GetMapping("/user")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
-    fun user(): String {
-        return "user"
+    @PostMapping("/writeMap")
+    fun writeMap(@RequestBody accounts: List<Account>): Map<String, Account> {
+        val dataMap = accounts.associateBy { it.owner }
+        return accountService.writeMap(dataMap)
     }
 
-    @GetMapping("/isAuthenticated")
-    @PreAuthorize("isAuthenticated()")
-    fun isAuthenticated(): String {
-        return "isAuthenticated"
+    @GetMapping("/readList")
+    fun readList(): List<Account> {
+        return accountService.readList()
     }
 
-    @GetMapping("/user/{id}")
-    @PreAuthorize("#id == authentication.name")
-    fun authentication(@PathVariable(name = "id") id: String): String {
-        return id
-    }
-
-    @GetMapping("/owner")
-    @PostAuthorize("returnObject.owner == authentication.name")
-    fun owner(name: String): AccountDto {
-        return AccountDto(name, false)
-    }
-
-    @GetMapping("/isSecure")
-    @PostAuthorize("hasAuthority('ROLE_ADMIN') and returnObject.isSecure")
-    fun isSecure(name: String, secure: String): AccountDto {
-        return AccountDto(name, "Y" == secure)
+    @GetMapping("/readMap")
+    fun readMap(): Map<String, Account> {
+        return accountService.readMap()
     }
 }
