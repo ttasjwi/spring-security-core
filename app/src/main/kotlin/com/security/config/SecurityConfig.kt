@@ -12,7 +12,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 @Configuration
 class SecurityConfig {
 
@@ -20,7 +20,7 @@ class SecurityConfig {
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             authorizeHttpRequests {
-                authorize(anyRequest, authenticated)
+                authorize(anyRequest, permitAll)
             }
             formLogin {  }
             csrf { disable() }

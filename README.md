@@ -86,6 +86,7 @@
 - <a href="/note/authorization-process/메서드 기반 권한 부여 - 활성화.md" target="_blank">메서드 기반 권한 부여 - 활성화</a>
 - <a href="/note/authorization-process/메서드 기반 권한 부여 - @PreAuthorize, @PostAuthorize.md" target="_blank">메서드 기반 권한 부여 - `@PreAuthorize`, `@PostAuthorize`</a>
 - <a href="/note/authorization-process/메서드 기반 권한 부여 - @PreFilter, @PostFilter.md" target="_blank">메서드 기반 권한 부여 - `@PreFilter`, `@PostFilter`</a>
+- <a href="/note/authorization-process/메서드 기반 권한 부여 - @Secured, JSR-250 및 부가 기능.md" target="_blank">메서드 기반 권한 부여 - `@Secured`, JSR-250 및 부가 기능</a>
 - 정적 자원 관리
 - 계층적 권한
 
