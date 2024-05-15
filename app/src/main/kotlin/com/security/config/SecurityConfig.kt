@@ -1,10 +1,13 @@
 package com.security.config
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.config.annotation.web.invoke
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -16,13 +19,23 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 class SecurityConfig {
 
+//    @Bean
+//    fun webSecurityCustomizer(): WebSecurityCustomizer {
+//        return WebSecurityCustomizer { webSecurity: WebSecurity ->
+//            webSecurity.ignoring().requestMatchers(
+//                PathRequest.toStaticResources().atCommonLocations()
+//            )
+//        }
+//    }
+
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             authorizeHttpRequests {
-                authorize(anyRequest, permitAll)
+                authorize(PathRequest.toStaticResources().atCommonLocations(), permitAll)
+                authorize(anyRequest, authenticated)
             }
-            formLogin {  }
+            formLogin { }
             csrf { disable() }
         }
         return http.build()
