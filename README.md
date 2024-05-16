@@ -88,7 +88,7 @@
 - <a href="/note/authorization-process/메서드 기반 권한 부여 - @PreFilter, @PostFilter.md" target="_blank">메서드 기반 권한 부여 - `@PreFilter`, `@PostFilter`</a>
 - <a href="/note/authorization-process/메서드 기반 권한 부여 - @Secured, JSR-250 및 부가 기능.md" target="_blank">메서드 기반 권한 부여 - `@Secured`, JSR-250 및 부가 기능</a>
 - <a href="/note/authorization-process/정적 자원 관리.md" target="_blank">정적 자원 관리</a>
-- 계층적 권한
+- <a href="/note/authorization-process/계층적 권한 - RoleHierarchy.md" target="_blank">계층적 권한 - RoleHierarchy</a>
 
 ---
 
