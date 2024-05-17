@@ -94,7 +94,7 @@
 
 <h2 id="authorization-architecture">인가 아키텍쳐</h2>
 
-- 인가 - Authorization
+- <a href="/note/authorization-architecture/인가 - GrantedAuthority.md" target="_blank">인가 - GrantedAuthority</a>
 - 인가 부여 관리자 - AuthorizationManager
 - 포인트 컷 메서드 보안 구현
 - AOP 메서드 보안
@@ -133,12 +133,6 @@
 ---
 
 이하는 구버전
-
-<h2 id="api-filter">스프링 시큐리티 기본 API 및 Filter 이해</h2>
-
-- <a href="/note/인가 API - 권한설정과 표현식.md" target="_blank">인가 API - 권한설정과 표현식</a>
-
----
 
 <h2 id="architecture">스프링 시큐리티 주요 아키텍처 이해</h2>
 
