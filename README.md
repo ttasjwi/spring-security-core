@@ -95,11 +95,10 @@
 <h2 id="authorization-architecture">인가 아키텍쳐</h2>
 
 - <a href="/note/authorization-architecture/인가 - GrantedAuthority.md" target="_blank">인가 - GrantedAuthority</a>
-- 인가 부여 관리자 - AuthorizationManager
+- <a href="/note/authorization-architecture/인가 관리자 - AuthorizationManager.md" target="_blank">인가 관리자 - AuthorizationManager</a>
 - 포인트 컷 메서드 보안 구현
 - AOP 메서드 보안
 - 인가 필터 - AuthorizationFilter
-
 
 ---
 
