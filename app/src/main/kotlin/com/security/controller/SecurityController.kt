@@ -25,4 +25,9 @@ class SecurityController {
     fun admin(): String {
         return "admin"
     }
+
+    @GetMapping("/secure")
+    fun api(): String {
+        return "secure"
+    }
 }

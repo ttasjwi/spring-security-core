@@ -1,5 +1,6 @@
 package com.security.config
 
+import com.security.authorization.manager.CustomAuthorizationManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -23,6 +24,7 @@ class SecurityConfig {
                 authorize("/user", hasRole("USER"))
                 authorize("/admin", hasAuthority("ROLE_ADMIN"))
                 authorize("/db", WebExpressionAuthorizationManager("hasRole('DB')"))
+                authorize("/secure", CustomAuthorizationManager())
                 authorize(anyRequest, authenticated)
             }
             formLogin { }
@@ -34,7 +36,7 @@ class SecurityConfig {
     fun userDetailsService(): UserDetailsService {
         val user = User.withUsername("user").password("{noop}1111").roles("USER").build()
         val db = User.withUsername("db").password("{noop}1111").roles("DB").build()
-        val admin = User.withUsername("admin").password("{noop}1111").roles("ADMIN").build()
+        val admin = User.withUsername("admin").password("{noop}1111").roles("ADMIN", "SECURE").build()
         return InMemoryUserDetailsManager(user, db, admin)
     }
 }
