@@ -1,8 +1,9 @@
 package com.security.config
 
-import com.security.authorization.manager.CustomAuthorizationManager
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.authorization.AuthorizationManager
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
@@ -10,7 +11,7 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
-import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext
 
 
 @EnableWebSecurity
@@ -18,14 +19,12 @@ import org.springframework.security.web.access.expression.WebExpressionAuthoriza
 class SecurityConfig {
 
     @Bean
-    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
+    fun securityFilterChain(
+        http: HttpSecurity,
+        @Qualifier("customAuthorizationManager") authorizationManager: AuthorizationManager<RequestAuthorizationContext>): SecurityFilterChain {
         http {
             authorizeHttpRequests {
-                authorize("/user", hasRole("USER"))
-                authorize("/admin", hasAuthority("ROLE_ADMIN"))
-                authorize("/db", WebExpressionAuthorizationManager("hasRole('DB')"))
-                authorize("/secure", CustomAuthorizationManager())
-                authorize(anyRequest, authenticated)
+                authorize(anyRequest, authorizationManager)
             }
             formLogin { }
         }
@@ -39,4 +38,5 @@ class SecurityConfig {
         val admin = User.withUsername("admin").password("{noop}1111").roles("ADMIN", "SECURE").build()
         return InMemoryUserDetailsManager(user, db, admin)
     }
+
 }

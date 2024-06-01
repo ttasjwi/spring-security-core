@@ -98,6 +98,7 @@
 - <a href="/note/authorization-architecture/인가 관리자 - AuthorizationManager.md" target="_blank">인가 관리자 - AuthorizationManager</a>
 - <a href="/note/authorization-architecture/요청 기반 인가 관리자.md" target="_blank">요청 기반 인가 관리자</a>
 - <a href="/note/authorization-architecture/요청 기반 CustomAuthorizationManager 구현.md" target="_blank">요청 기반 CustomAuthorizationManager 구현</a>
+- <a href="/note/authorization-architecture/RequestMatcherDelegatingAuthorizationManager 인가 설정 응용하기.md" target="_blank">RequestMatcherDelegatingAuthorizationManager 인가 설정 응용하기</a>
 - 포인트 컷 메서드 보안 구현
 - AOP 메서드 보안
 - 인가 필터 - AuthorizationFilter
