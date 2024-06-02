@@ -1,33 +1,27 @@
 package com.security.controller
 
+import com.security.domain.Account
+import com.security.domain.DataService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class SecurityController {
-
-    @GetMapping("/")
-    fun index(): String {
-        return "index"
-    }
+class SecurityController(
+    private val dataService: DataService
+) {
 
     @GetMapping("/user")
     fun user(): String {
-        return "user"
+        return dataService.getUser()
     }
 
-    @GetMapping("/db")
-    fun db(): String {
-        return "db"
+    @GetMapping("/owner")
+    fun owner(name: String): Account {
+        return dataService.getOwner(name)
     }
 
-    @GetMapping("/admin")
-    fun admin(): String {
-        return "admin"
-    }
-
-    @GetMapping("/secure")
-    fun api(): String {
-        return "secure"
+    @GetMapping("/display")
+    fun display(): String {
+        return dataService.display()
     }
 }
