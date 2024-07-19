@@ -5,6 +5,9 @@ dependencies {
     // security
     implementation(Dependencies.SPRING_SECURITY)
 
+    // aop
+    implementation(Dependencies.SPRING_AOP)
+
     // thymeleaf
     implementation(Dependencies.THYMELEAF)
 

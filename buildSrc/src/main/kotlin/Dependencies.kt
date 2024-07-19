@@ -6,6 +6,7 @@ object Dependencies {
 
     // spring
     const val SPRING_VALIDATION = "org.springframework.boot:spring-boot-starter-validation"
+    const val SPRING_AOP = "org.springframework.boot:spring-boot-starter-aop"
 
     // web
     const val SPRING_WEB = "org.springframework.boot:spring-boot-starter-web"
