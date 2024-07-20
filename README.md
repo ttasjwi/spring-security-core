@@ -102,8 +102,7 @@
 - <a href="/note/authorization-architecture/메서드 기반 인가 관리자.md" target="_blank">메서드 기반 인가 관리자</a>
 - <a href="/note/authorization-architecture/메서드 기반 Custom AuthorizationManager 구현.md" target="_blank">메서드 기반 Custom AuthorizationManager 구현</a>
 - <a href="/note/authorization-architecture/포인트 컷을 지정하여 메서드 보안 적용.md" target="_blank">포인트 컷을 지정하여 메서드 보안 적용</a>
-- AOP 메서드 보안
-- 인가 필터 - AuthorizationFilter
+- <a href="/note/authorization-architecture/AOP 메서드 보안 구현 - Advice, Pointcut, Advisor.md" target="_blank">AOP 메서드 보안 구현 - Advice, Pointcut, Advisor</a>
 
 ---
 
