@@ -108,7 +108,7 @@
 
 <h2 id="event-handling">이벤트 처리</h2>
 
-- Authentication Events
+- <a href="/note/event-handling/인증 이벤트 - Authentication Events.md" target="_blank">인증 이벤트 - Authentication Events</a>
 - Authorization Events
 
 ---
